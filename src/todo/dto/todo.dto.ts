@@ -1,4 +1,4 @@
-import { IsDate, IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
 export class TodoDto {
   @IsString()
@@ -9,15 +9,15 @@ export class TodoDto {
   @IsNotEmpty()
   description: string;
 
-  @IsDate()
+  @IsString()
   @IsNotEmpty()
-  startDate: Date;
-
-  @IsDate()
-  @IsNotEmpty()
-  endDate: Date;
+  startDate: string;
 
   @IsString()
+  @IsNotEmpty()
+  endDate: string;
+
+  @IsNumber()
   @IsNotEmpty()
   progressStatus: number;
 

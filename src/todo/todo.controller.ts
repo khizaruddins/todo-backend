@@ -1,27 +1,40 @@
-import { Body, Controller, Delete, Get, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Post,
+  Put,
+  UseGuards,
+} from '@nestjs/common';
 import { TodoService } from './todo.service';
 import { TodoDto } from './dto';
+import { Todo } from '@prisma/client';
+import { GetTodo } from 'src/auth/decorator/get-todo.decorator';
+import { JwtGuard } from 'src/auth/guard';
 
+@UseGuards(JwtGuard)
 @Controller('todo')
 export class TodoController {
   constructor(private todoService: TodoService) {}
 
-  @Get('/')
-  getTodos() {
-    return this.todoService.getTodos();
+  @Get()
+  getTodos(@GetTodo() todo: Todo) {
+    console.log(todo);
+    return todo;
   }
 
-  @Post('/')
+  @Post()
   createTodo(@Body() todoDto: TodoDto) {
     return this.todoService.createTodo(todoDto);
   }
 
-  @Put('/')
+  @Put()
   editTodo() {
     return this.todoService.editTodo();
   }
 
-  @Delete('/')
+  @Delete()
   deleteTodo() {
     return this.todoService.deleteTodo();
   }

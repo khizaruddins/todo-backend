@@ -35,8 +35,8 @@ model Todo{
   id Int @id @default(autoincrement())
   title String
   description String
-  startDate DateTime
-  endDate DateTime
+  startDate String
+  endDate String
   progressStatus Int
   tag String
   createdAt DateTime @default(now())
